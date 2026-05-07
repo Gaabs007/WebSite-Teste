@@ -1,0 +1,1 @@
+ALTER TABLE `albumPosts` MODIFY COLUMN `imageUrls` json NOT NULL;

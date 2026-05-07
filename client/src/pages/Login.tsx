@@ -17,7 +17,7 @@ export default function Login() {
     e.preventDefault();
     setError("");
     setLoading(true);
-
+        
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
@@ -27,15 +27,16 @@ export default function Login() {
         },
         body: JSON.stringify({ username, password }),
       });
-
-      if (!response.ok) {
+      console.log(response);
+      if (response.ok) {
         const data = await response.json();
-        setError(data.error || "Falha ao fazer login");
-        return;
+        console.log("entra")
+        if (data.success) {
+          setLocation("/admin");
+        } else {
+          setError("Login inválido");
+        }
       }
-
-      // Login successful, redirect to admin panel
-      setLocation("/admin");
     } catch (err) {
       setError("Erro ao conectar com o servidor");
       console.error("Login error:", err);
@@ -112,14 +113,6 @@ export default function Login() {
               )}
             </Button>
           </form>
-
-          <div className="mt-4 pt-4 border-t border-border">
-            <p className="text-xs text-muted-foreground text-center">
-              Credenciais de demonstração:<br />
-              Usuário: <strong>admin</strong><br />
-              Senha: <strong>1234</strong>
-            </p>
-          </div>
         </CardContent>
       </Card>
     </div>

@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import { drizzle } from 'drizzle-orm/mysql2';
 import { users } from './drizzle/schema.js';
 import mysql from 'mysql2/promise';
+import 'dotenv/config';
 
 const DATABASE_URL = process.env.DATABASE_URL || 'file:./dev.db';
 const PASSWORD = process.env.OWNER_PASSWORD;
@@ -23,7 +24,7 @@ async function seedAdmin() {
       email: 'admin@saberes-indigenas.com',
       role: 'admin',
     });
-    
+
     await connection.end();
   } catch (error) {
     console.error('Error seeding admin user:', error);

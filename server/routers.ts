@@ -18,7 +18,26 @@ export const appRouter = router({
       } as const;
     }),
   }),
+  login: publicProcedure
+  .input(z.object({
+    username: z.string(),
+    password: z.string(),
+  }))
+  .mutation(async ({ input, ctx }) => {
+    const user = await db.getUserByUsername(input.username);
+    console.log("teste");
 
+    // ctx.res.cookie(
+    //   COOKIE_NAME,
+    //   token,
+    //   getSessionCookieOptions(ctx.req)
+    // );
+
+    // return {
+    //   success: true,
+    //   user,
+    // };
+  }),
   // Podcasts router
   podcasts: router({
     list: publicProcedure.query(() => db.getPodcasts()),
