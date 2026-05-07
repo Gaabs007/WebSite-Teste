@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1770863703315,
+      "tag": "0000_cynical_devos",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1770863858284,
+      "tag": "0001_happy_master_mold",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1771904667103,
+      "tag": "0002_long_scalphunter",
+      "breakpoints": true
+    }
+  ]
+}
