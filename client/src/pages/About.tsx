@@ -56,11 +56,11 @@ export default function About() {
                   key={member.id}
                   className="overflow-hidden hover:shadow-lg transition-shadow border-2 border-transparent hover:border-primary/50"
                 >
-                  <div className="relative w-full h-64 bg-foreground/10 overflow-hidden">
+                  <div className="w-full bg-foreground/10 flex items-center justify-center p-4">
                     <img
                       src={member.photoUrl}
                       alt={member.name}
-                      className="w-full h-full object-cover"
+                      className="max-h-64 w-auto object-contain"
                     />
                   </div>
                   <CardHeader>

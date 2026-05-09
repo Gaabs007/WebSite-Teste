@@ -15,7 +15,6 @@ export function registerOAuthRoutes(app: Express) {
   // Login route - accepts username and password
   app.post("/api/auth/login", async (req: Request, res: Response) => {
     const { username, password } = req.body;
-    console.log("oi");
     if (!username || !password) {
       res.status(400).json({ error: "username and password are required" });
       return;
@@ -36,7 +35,6 @@ export function registerOAuthRoutes(app: Express) {
         res.status(401).json({ error: "Invalid credentials" });
         return;
       }
-      console.log(user.id);
       // Create session token
       const sessionToken = await sdk.createSessionToken(String(user.id), {
         name: user.name || user.username,

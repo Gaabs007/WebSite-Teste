@@ -4,6 +4,8 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router, protectedProcedure, adminProcedure } from "./_core/trpc";
 import { z } from "zod";
 import * as db from "./db";
+import bcrypt from "bcryptjs";
+import { sdk } from "./_core/sdk";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -18,26 +20,7 @@ export const appRouter = router({
       } as const;
     }),
   }),
-  login: publicProcedure
-  .input(z.object({
-    username: z.string(),
-    password: z.string(),
-  }))
-  .mutation(async ({ input, ctx }) => {
-    const user = await db.getUserByUsername(input.username);
-    console.log("teste");
 
-    // ctx.res.cookie(
-    //   COOKIE_NAME,
-    //   token,
-    //   getSessionCookieOptions(ctx.req)
-    // );
-
-    // return {
-    //   success: true,
-    //   user,
-    // };
-  }),
   // Podcasts router
   podcasts: router({
     list: publicProcedure.query(() => db.getPodcasts()),
@@ -73,7 +56,7 @@ export const appRouter = router({
         const { id, ...data } = input;
         return db.updatePodcast(id, data);
       }),
-    delete: adminProcedure
+    delete: publicProcedure
       .input(z.number())
       .mutation(({ input }) => db.deletePodcast(input)),
   }),
@@ -145,6 +128,8 @@ export const appRouter = router({
       )
       .mutation(({ input, ctx }) => {
         const { id, ...data } = input;
+        console.log(ctx);
+        console.log(input);
         return db.updateTeamMember(id, data);
       }),
     delete: adminProcedure

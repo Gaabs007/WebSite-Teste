@@ -163,12 +163,12 @@ export default function Album() {
                               setSelectedPostId(post.id);
                               setSelectedImageIndex(index);
                             }}
-                            className="relative group overflow-hidden rounded-lg aspect-square bg-foreground/10"
+                            className="relative group overflow-hidden rounded-lg bg-foreground/10 min-h-[200px] flex items-center justify-center"
                           >
                             <img
                               src={image}
                               alt={`${post.title} - Imagem ${index + 1}`}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform"
+                              className="max-h-[300px] w-full object-contain group-hover:scale-105 transition-transform"
                             />
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                               <ImageIcon className="w-6 h-6 text-white" />

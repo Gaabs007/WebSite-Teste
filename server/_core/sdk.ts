@@ -63,9 +63,10 @@ class SDKServer {
 
   async authenticateRequest(req: Request): Promise<User> {
     // Regular authentication flow
+    console.log(req.headers.cookie);
     const cookies = this.parseCookies(req.headers.cookie);
     const sessionCookie = cookies.get(COOKIE_NAME);
-
+    
     if (!sessionCookie) {
       throw ForbiddenError("No session cookie");
     }
@@ -82,7 +83,7 @@ class SDKServer {
     if (!user) {
       throw ForbiddenError("User not found");
     }
-
+    console.log(user);
     await db.updateUserLastSignIn(user.id);
 
     return user;
