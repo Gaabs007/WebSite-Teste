@@ -11,11 +11,30 @@ export default function AdminDashboard() {
   const { user, loading } = useAuth();
   const [, setLocation] = useLocation();
 
-  // useEffect(() => {
-  //   if (!loading && !user) {
-  //     setLocation("/");
-  //   }
-  // }, [user, loading, setLocation]);
+  useEffect(() => {
+    if (!loading) {
+
+      if (!user || user.role !== "admin") {
+        setLocation("/login");
+      }
+
+    }
+
+  }, [user, loading, setLocation]);
+
+  // Enquanto autenticação carrega
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin" />
+      </div>
+    );
+  }
+
+  // Bloqueia renderização
+  if (!user || user.role !== "admin") {
+    return null;
+  }
 
   return (
     <div className="min-h-screen pt-24 pb-12 bg-foreground/5">

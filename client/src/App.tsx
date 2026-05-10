@@ -23,7 +23,7 @@ function Router() {
         <Route path={"/album"} component={Album} />
         <Route path={"/sobre"} component={About} />
         <Route path={"/login"} component={Login} />
-        <Route path={"/admin"} component={AdminDashboard} />
+        <Route path={"/admin"} component={AdminDashboard} /> 
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
