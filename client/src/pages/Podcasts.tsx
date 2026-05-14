@@ -7,7 +7,6 @@ import { useState } from "react";
 export default function Podcasts() {
   const { data: podcasts = [], isLoading } = trpc.podcasts.list.useQuery();
   const [selectedPodcast, setSelectedPodcast] = useState<typeof podcasts[0] | null>(null);
-  console.log(selectedPodcast?.mediaUrl);
   return (
     <div className="min-h-screen pt-24 pb-12">
       <div className="container">

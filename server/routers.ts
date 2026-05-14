@@ -128,8 +128,6 @@ export const appRouter = router({
       )
       .mutation(({ input, ctx }) => {
         const { id, ...data } = input;
-        console.log(ctx);
-        console.log(input);
         return db.updateTeamMember(id, data);
       }),
     delete: adminProcedure

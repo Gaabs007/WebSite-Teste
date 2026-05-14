@@ -29,7 +29,6 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 }
 
 async function startServer() {
-  console.log("INDEX TS");
   const app = express();
   const server = createServer(app);
   // Configure body parser with larger size limit for file uploads

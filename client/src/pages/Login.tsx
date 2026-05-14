@@ -27,10 +27,8 @@ export default function Login() {
         },
         body: JSON.stringify({ username, password }),
       });
-      console.log(response);
       if (response.ok) {
         const data = await response.json();
-        console.log("entra")
         if (data.success) {
           setLocation("/admin");
         } else {

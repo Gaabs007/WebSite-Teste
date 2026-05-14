@@ -22,7 +22,6 @@ export function registerOAuthRoutes(app: Express) {
 
     try {
       const user = await db.getUserByUsername(username);
-      console.log(user);
       if (!user) {
         res.status(401).json({ error: "Invalid credentials" });
         return;
