@@ -92,20 +92,12 @@ export default function Podcasts() {
                 className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-primary/50"
               >
                 {podcast.thumbnailUrl && (
-                  <div className="relative w-full h-48 bg-foreground/10 overflow-hidden">
+                  <div className="w-full bg-foreground/10 flex items-center justify-center p-4">
                     <img
                       src={podcast.thumbnailUrl}
                       alt={podcast.title}
-                      className="w-full h-full object-cover"
+                      className="max-h-64 w-auto object-contain"
                     />
-                    <button
-                      onClick={() => setSelectedPodcast(podcast)}
-                      className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 hover:opacity-100 transition-opacity"
-                    >
-                      <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
-                        <Play className="w-8 h-8 text-primary-foreground ml-1" />
-                      </div>
-                    </button>
                   </div>
                 )}
                 <CardHeader>

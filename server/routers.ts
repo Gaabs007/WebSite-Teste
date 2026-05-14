@@ -134,6 +134,50 @@ export const appRouter = router({
       .input(z.number())
       .mutation(({ input }) => db.deleteTeamMember(input)),
   }),
+
+
+// Documents router
+  documents: router({
+    list: publicProcedure.query(() => db.getDocuments()),
+
+    getById: publicProcedure
+      .input(z.number())
+      .query(({ input }) => db.getDocumentById(input)),
+
+    create: adminProcedure
+      .input(
+        z.object({
+          title: z.string().min(1),
+          description: z.string().optional(),
+          documentUrl: z.string().url(),
+        })
+      )
+      .mutation(({ input }) =>
+        db.createDocument({
+          ...input,
+          createdBy: 0,
+        })
+      ),
+
+    update: adminProcedure
+      .input(
+        z.object({
+          id: z.number(),
+          title: z.string().min(1).optional(),
+          description: z.string().optional(),
+          documentUrl: z.string().url().optional(),
+        })
+      )
+      .mutation(({ input }) => {
+        const { id, ...data } = input;
+
+        return db.updateDocument(id, data);
+      }),
+
+    delete: adminProcedure
+      .input(z.number())
+      .mutation(({ input }) => db.deleteDocument(input)),
+  }),
 });
 
 export type AppRouter = typeof appRouter;

@@ -13,6 +13,7 @@ export default function Navbar() {
     { href: "/", label: "Início" },
     { href: "/podcasts", label: "Podcasts" },
     { href: "/album", label: "Álbum" },
+    { href: "/documentos", label: "Documentos" },
     { href: "/sobre", label: "Sobre" },
   ];
 

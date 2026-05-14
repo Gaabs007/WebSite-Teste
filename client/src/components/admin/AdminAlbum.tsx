@@ -117,7 +117,7 @@ export default function AdminAlbum() {
               Nova Postagem
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl">
+          <DialogContent className="max-w-2xl overflow-hidden">
             <DialogHeader>
               <DialogTitle>
                 {editingId ? "Editar Postagem" : "Criar Nova Postagem"}
@@ -141,6 +141,7 @@ export default function AdminAlbum() {
               <div>
                 <label className="block text-sm font-medium mb-1">Descrição</label>
                 <Textarea
+                  className="break-all whitespace-pre-wrap"
                   value={formData.description}
                   onChange={(e) =>
                     setFormData({ ...formData, description: e.target.value })
@@ -156,6 +157,7 @@ export default function AdminAlbum() {
                 <Textarea
                   required
                   value={formData.imageUrls}
+                  className="w-full break-all whitespace-pre-wrap overflow-x-hidden"
                   onChange={(e) =>
                     setFormData({ ...formData, imageUrls: e.target.value })
                   }
@@ -195,10 +197,10 @@ export default function AdminAlbum() {
           {posts.map((post) => {
             const images = normalizeImages(post.imageUrls);
             return (
-              <Card key={post.id}>
+              <Card key={post.id} className="overflow-hidden">
                 <CardHeader>
                   <div className="flex items-start justify-between">
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <CardTitle>{post.title}</CardTitle>
                       <CardDescription className="mt-1">
                         {images.length} imagem{images.length !== 1 ? "s" : ""}
@@ -223,7 +225,7 @@ export default function AdminAlbum() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-foreground/80 line-clamp-2 mb-3">
+                  <p className="text-sm text-foreground/80 line-clamp-2 mb-3 break-words whitespace-normal">
                     {post.description || "Sem descrição"}
                   </p>
                   <div className="flex gap-2 flex-wrap">

@@ -5,6 +5,7 @@ import { Loader2 } from "lucide-react";
 import AdminPodcasts from "@/components/admin/AdminPodcasts";
 import AdminAlbum from "@/components/admin/AdminAlbum";
 import AdminTeam from "@/components/admin/AdminTeam";
+import AdminDocuments from "@/components/admin/AdminDocuments";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function AdminDashboard() {
@@ -49,9 +50,10 @@ export default function AdminDashboard() {
         </div>
 
         <Tabs defaultValue="podcasts" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
             <TabsTrigger value="podcasts">Podcasts</TabsTrigger>
             <TabsTrigger value="album">Álbum</TabsTrigger>
+            <TabsTrigger value="documents">Documentos</TabsTrigger>
             <TabsTrigger value="team">Equipe</TabsTrigger>
           </TabsList>
 
@@ -61,6 +63,10 @@ export default function AdminDashboard() {
 
           <TabsContent value="album" className="mt-6">
             <AdminAlbum />
+          </TabsContent>
+
+          <TabsContent value="documents" className="mt-6">
+            <AdminDocuments />
           </TabsContent>
 
           <TabsContent value="team" className="mt-6">

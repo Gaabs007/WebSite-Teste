@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, podcasts, InsertPodcast, albumPosts, InsertAlbumPost, teamMembers, InsertTeamMember, sessions, InsertSession } from "../drizzle/schema";
+import { InsertUser, users, podcasts, InsertPodcast, albumPosts, InsertAlbumPost, teamMembers, InsertTeamMember, sessions, InsertSession, documents, InsertDocument } from "../drizzle/schema";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -190,4 +190,71 @@ export async function deleteTeamMember(id: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   await db.delete(teamMembers).where(eq(teamMembers.id, id));
+}
+
+/**
+ * Document queries
+ */
+export async function getDocuments() {
+  const db = await getDb();
+
+  if (!db) return [];
+
+  return db.select().from(documents).orderBy((t) => t.createdAt);
+}
+
+export async function getDocumentById(id: number) {
+  const db = await getDb();
+
+  if (!db) return undefined;
+
+  const result = await db
+    .select()
+    .from(documents)
+    .where(eq(documents.id, id))
+    .limit(1);
+
+  return result[0];
+}
+
+export async function createDocument(data: InsertDocument) {
+  const db = await getDb();
+
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  const result = await db.insert(documents).values(data);
+
+  return result[0];
+}
+
+export async function updateDocument(
+  id: number,
+  data: Partial<InsertDocument>
+) {
+  const db = await getDb();
+
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  await db
+    .update(documents)
+    .set(data)
+    .where(eq(documents.id, id));
+
+  return getDocumentById(id);
+}
+
+export async function deleteDocument(id: number) {
+  const db = await getDb();
+
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  await db
+    .delete(documents)
+    .where(eq(documents.id, id));
 }

@@ -11,6 +11,7 @@ import Album from "./pages/Album";
 import About from "./pages/About";
 import AdminDashboard from "./pages/AdminDashboard";
 import Login from "./pages/Login";
+import Documents from "./pages/Documents";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -21,6 +22,7 @@ function Router() {
         <Route path={"/"} component={Home} />
         <Route path={"/podcasts"} component={Podcasts} />
         <Route path={"/album"} component={Album} />
+        <Route path={"/documentos"} component={Documents} />
         <Route path={"/sobre"} component={About} />
         <Route path={"/login"} component={Login} />
         <Route path={"/admin"} component={AdminDashboard} /> 

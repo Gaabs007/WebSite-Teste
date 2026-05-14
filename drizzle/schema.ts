@@ -93,3 +93,25 @@ export const teamMembers = mysqlTable("teamMembers", {
 
 export type TeamMember = typeof teamMembers.$inferSelect;
 export type InsertTeamMember = typeof teamMembers.$inferInsert;
+
+export const documents = mysqlTable("documents", {
+  id: int("id").autoincrement().primaryKey(),
+
+  title: varchar("title", { length: 255 }).notNull(),
+
+  description: text("description"),
+
+  documentUrl: text("documentUrl").notNull(), // URL do PDF
+
+  createdBy: int("createdBy").notNull(),
+
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+
+  updatedAt: timestamp("updatedAt")
+    .defaultNow()
+    .onUpdateNow()
+    .notNull(),
+});
+
+export type Document = typeof documents.$inferSelect;
+export type InsertDocument = typeof documents.$inferInsert;
