@@ -65,62 +65,96 @@ export default function Album() {
           </p>
         </div>
 
-        {/* Image Viewer Modal */}
-        {currentImage && (
-          <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-            <div className="relative max-w-4xl w-full">
-              <button
-                onClick={() => {
-                  setSelectedImageIndex(null);
-                  setSelectedPostId(null);
-                }}
-                className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
-              >
-                <X className="w-8 h-8" />
-              </button>
+{/* Image Viewer Modal */}
+{currentImage && (
+  <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
 
-              <img
-                src={currentImage}
-                alt="Imagem ampliada"
-                className="w-full h-auto rounded-lg"
-              />
+    <div className="img-container">
 
-              {currentImages.length > 1 && (
-                <div className="flex justify-between items-center mt-4 text-white">
-                  <button
-                    onClick={() =>
-                      setSelectedImageIndex(
-                        selectedImageIndex === 0
-                          ? currentImages.length - 1
-                          : selectedImageIndex! - 1
-                      )
-                    }
-                    className="px-4 py-2 bg-primary/80 hover:bg-primary rounded-lg"
-                  >
-                    ← Anterior
-                  </button>
+{/* TEXTO */}
+<div className="txt-frmt-fa text-card-foreground gap-6 rounded-xl py-6 shadow-sm border-2 border-primary/20 hover:border-primary/50 transition-colors">
+  
+  <div className="txt-frmt">
 
-                  <span className="text-sm">
-                    {selectedImageIndex! + 1} de {currentImages.length}
-                  </span>
+    <h1 className="txt-title">
+      {currentPost?.title}
+    </h1>
 
-                  <button
-                    onClick={() =>
-                      setSelectedImageIndex(
-                        selectedImageIndex === currentImages.length - 1
-                          ? 0
-                          : selectedImageIndex! + 1
-                      )
-                    }
-                    className="px-4 py-2 bg-primary/80 hover:bg-primary rounded-lg"
-                  >
-                    Próxima →
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+    {currentPost?.createdAt && (
+      <p className="txt-subtitle">
+        {new Date(currentPost.createdAt).toLocaleDateString("pt-BR", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        })}
+      </p>
+    )}
+
+    {currentPost?.description && (
+      <div className="txt-content">
+        {currentPost.description}
+      </div>
+    )}
+
+  </div>
+</div>
+
+      {/* IMAGEM */}
+      <div className="img-frmt">
+
+        <button
+          onClick={() => {
+            setSelectedImageIndex(null);
+            setSelectedPostId(null);
+          }}
+          className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+        >
+          <X className="w-8 h-8" />
+        </button>
+
+        <img
+          src={currentImage}
+          alt="Imagem ampliada"
+        />
+      </div>
+    </div>
+
+    {currentImages.length > 1 && (
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex justify-between items-center gap-6 text-white">
+
+        <button
+          onClick={() =>
+            setSelectedImageIndex(
+              selectedImageIndex === 0
+                ? currentImages.length - 1
+                : selectedImageIndex! - 1
+            )
+          }
+          className="px-4 py-2 bg-primary/80 hover:bg-primary rounded-lg"
+        >
+          ← Anterior
+        </button>
+
+        <span className="text-sm">
+          {selectedImageIndex! + 1} de {currentImages.length}
+        </span>
+
+        <button
+          onClick={() =>
+            setSelectedImageIndex(
+              selectedImageIndex === currentImages.length - 1
+                ? 0
+                : selectedImageIndex! + 1
+            )
+          }
+          className="px-4 py-2 bg-primary/80 hover:bg-primary rounded-lg"
+        >
+          Próxima →
+        </button>
+      </div>
+    )}
+  </div>
+)}
 
         {/* Posts */}
         {isLoading ? (
