@@ -157,23 +157,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-primary text-primary-foreground">
-        <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
-            Participe da Preservação Cultural
-          </h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto opacity-90">
-            Junte-se a nós na missão de valorizar, preservar e compartilhar os saberes indígenas com as futuras gerações.
-          </p>
-          <Link href="/sobre">
-            <Button size="lg" variant="secondary">
-              Saiba Mais
-            </Button>
-          </Link>
-        </div>
-      </section>
     </div>
   );
 }
