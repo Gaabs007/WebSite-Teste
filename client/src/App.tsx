@@ -1,3 +1,5 @@
+import ScrollToTop from "@/components/ScrollToTop";
+import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -17,6 +19,7 @@ function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <>
+    <ScrollToTop />
       <Navbar />
       <Switch>
         <Route path={"/"} component={Home} />
@@ -30,6 +33,7 @@ function Router() {
         {/* Final fallback route */}
         <Route component={NotFound} />
       </Switch>
+      <Footer />
     </>
   );
 }

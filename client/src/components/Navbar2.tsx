@@ -11,22 +11,63 @@ export default function Navbar() {
   const navLinks = [
     { href: "/podcasts", label: "Podcasts" },
     { href: "/album", label: "Álbum" },
-    { href: "/documentos", label: "Documentos" },
     { href: "/sobre", label: "Sobre" },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-green-700 border-b border-green-800 z-50 shadow-lg">
-      <div className="container flex items-center justify-between h-20">
+    <nav
+      className="
+        fixed top-0 left-0 right-0 z-50
+        border-b border-black/30
+        shadow-2xl
+        backdrop-blur-md
+        overflow-hidden
+        bg-[linear-gradient(to_bottom,_#0f5c2b_0%,_#166534_28%,_#991b1b_50%,_#166534_72%,_#0f5c2b_100%)]
+        before:absolute before:inset-0
+        before:bg-[radial-gradient(circle_at_var(--x,_50%)_var(--y,_50%),rgba(255,255,255,0.14),transparent_320px)]
+        before:pointer-events-none
+      "
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+
+        e.currentTarget.style.setProperty(
+          "--x",
+          `${e.clientX - rect.left}px`
+        );
+
+        e.currentTarget.style.setProperty(
+          "--y",
+          `${e.clientY - rect.top}px`
+        );
+      }}
+    >
+      {/* Camada escura */}
+      <div className="absolute inset-0 bg-black/70 pointer-events-none z-0" />
+
+      {/* Conteúdo */}
+      <div className="container relative z-10 flex items-center justify-between h-20">
 
         {/* Logo */}
         <Link href="/">
-          <div className="flex items-center gap-4 cursor-pointer group">
-
+          <div
+            className="
+              flex items-center gap-4 cursor-pointer group
+              transition-all duration-300
+              hover:scale-[1.03]
+              hover:drop-shadow-[0_0_18px_rgba(255,255,255,0.35)]
+            "
+          >
             <img
               src="/img/logo.webp"
               alt="Saberes Indígenas"
-              className="h-14 md:h-16 w-auto object-contain rounded-xl group-hover:opacity-90 transition-opacity"
+              className="
+                h-14 md:h-16
+                w-auto
+                object-contain
+                rounded-xl
+                group-hover:opacity-90
+                transition-opacity
+              "
             />
 
             <div className="flex flex-col leading-tight">
@@ -41,14 +82,25 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href}>
-              <div className="text-white/90 hover:text-white transition-colors font-medium cursor-pointer text-lg">
+              <div
+                className="
+                  text-white/100
+                  hover:text-white
+                  transition-all duration-300
+                  font-medium
+                  cursor-pointer
+                  !text-3x1
+                  hover:scale-110
+                  hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.55)]
+                "
+              >
                 {link.label}
               </div>
             </Link>
           ))}
         </div>
 
-        {/* Auth Section */}
+        {/* Auth */}
         <div className="hidden md:flex items-center gap-4">
           {user && (
             <Button
@@ -62,7 +114,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Button */}
         <button
           className="md:hidden p-2 text-white"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -75,15 +127,24 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-green-600 bg-green-700">
+        <div className="md:hidden border-t border-green-700/40 bg-black/90 backdrop-blur-md">
           <div className="container py-4 flex flex-col gap-4">
 
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
                 <div
-                  className="text-white/90 hover:text-white transition-colors font-medium cursor-pointer text-lg"
+                  className="
+                    text-white/90
+                    hover:text-white
+                    transition-all duration-300
+                    font-medium
+                    cursor-pointer
+                    text-lg
+                    hover:scale-105
+                    hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.55)]
+                  "
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -91,11 +152,20 @@ export default function Navbar() {
               </Link>
             ))}
 
-            <div className="border-t border-green-600 pt-4 flex flex-col gap-2">
+            <div className="border-t border-white/10 pt-4 flex flex-col gap-2">
 
               <Link href="/login">
                 <div
-                  className="text-white/90 hover:text-white transition-colors font-medium cursor-pointer text-lg"
+                  className="
+                    text-white/90
+                    hover:text-white
+                    transition-all duration-300
+                    font-medium
+                    cursor-pointer
+                    text-lg
+                    hover:scale-105
+                    hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.55)]
+                  "
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Painel Admin
